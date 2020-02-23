@@ -1,0 +1,110 @@
+
+<h4>Basic native select</h4>
+<mat-form-field>
+  <mat-label>Cars</mat-label>
+  <select matNativeControl required>
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </select>
+</mat-form-field>
+
+
+<div class="search-div">
+
+    <mat-form-field class="search-form-field" floatLabel="never">
+      <input matInput [(ngModel)]="searchKey" placeholder="Please select the year" autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="mat-elevation-z8">
+    <mat-table [dataSource]="listData"  matSort>
+      <ng-container matColumnDef="year">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>YEAR</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.year}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="sr">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>SR</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.sr}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>DESCRIPTION</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.description}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="jan">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>JAN</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.jan}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="feb">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>FEB</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.feb}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="mar">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>MAR</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.mar}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="apr">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>APR</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.apr}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="may">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>MAY</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.may}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="jun">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>JUN</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.jun}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="jul">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>JUL</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.jul}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="aug">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>AUG</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.aug}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="sep">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>SEP</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.sep}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="oct">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>OCT</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.oct}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nov">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>NOV</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.nov}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="dec">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>DEC</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.dec}}</mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="loading">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          Loading data...
+        </mat-footer-cell>
+      </ng-container>
+      <ng-container matColumnDef="noData">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          No data.
+        </mat-footer-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+      <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+  </div>
